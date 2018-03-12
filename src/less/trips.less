@@ -1,0 +1,25 @@
+@import './variables.less';
+
+.trip-dates{
+  color: @theme-dark;
+  p{
+    text-align: center;
+  }
+  form{
+    div{
+      margin-top: 20px;
+
+    }
+    button{
+      background-color: @theme-disabled;
+      padding: 20px;
+      border-radius: 0;
+      border: 0;
+      margin-top: 20px;
+      &.active{
+          background-color: @theme-highlight;
+      }
+    }
+  }
+
+}
