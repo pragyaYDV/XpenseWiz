@@ -1,8 +1,8 @@
 import React from 'react';
-import './../less/trips.less';
+import './../less/trip-dates.less';
 import { setDates } from '../store.js';
 import {connect} from  'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import TripDetails from './TripDetails.jsx';
 
 class TripsHome extends React.Component{
@@ -19,7 +19,7 @@ class TripsHome extends React.Component{
   onDateChange(e){
     let nextBtn = "",errorState=false;
     if(this.startDate.value && this.endDate.value){
-      if((new Date(this.startDate.value)) < (new Date(this.endDate.value))){
+      if((new Date(this.startDate.value)) <= (new Date(this.endDate.value))){
         nextBtn = "active";
         errorState = false;
       }else{
@@ -48,7 +48,7 @@ class TripsHome extends React.Component{
             <input type="date" ref= {input => this.endDate = input} name="endDate" onChange={this.onDateChange} />
           </div>
           <div className={"error "+ (this.state.errorState ? '' : 'hide')}>The end date cannot be less than the start date.</div>
-          <a className={this.state.nextBtn} onClick={this.nextClick} href="/tripDetails" >Next</a>
+          <Link to={'/tripDetails'} onClick={this.nextClick}>All Issues</Link>
         </form>
 
       </div>
@@ -57,4 +57,5 @@ class TripsHome extends React.Component{
   }
 }
 
-export default withRouter(connect()(TripsHome));
+TripsHome = withRouter(connect()(TripsHome));
+export default TripsHome;

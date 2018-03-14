@@ -10,7 +10,7 @@ export const initialState = {
     entries: [],
     currentPage: 0
   },
-  purchases: null
+  purchaseData: {}
 }
 /*--------------------- REDUCERS---------------_*/
 const tripDates = (state = initialState.tripData.tripDates, action) => {
@@ -22,7 +22,7 @@ const tripDates = (state = initialState.tripData.tripDates, action) => {
       let endDate = new Date(action.endDate);
         while(startDate<=endDate){
           pages.push({
-            page: count,
+            pageNumber: count,
             date: startDate
           });
           startDate.setDate(startDate.getDate() + 1);
@@ -34,30 +34,51 @@ const tripDates = (state = initialState.tripData.tripDates, action) => {
             pages: pages
         });
     default:
-    console.log("returning default");
       return state;
   }
 }
 const entries = (state = [], action) => {
   switch(action.type){
+
     case "ADD_ENTRY":
-      if(currentPage == state.length)
-        return [...state, action.details];
-      else{
-        return state.map((cur,i) => {
-          if(i==currentPage){
-            return action.details;
+        createTripExpense(action.data);
+        return [...state, action.data];
+
+    case "EDIT_ENTRY":
+        let newState = state.map((entry,i)=>{
+          if(i===action.page){
+            return action.data;
+          }else{
+            return entry;
           }
         });
-      }
+        return newState;
+
     default:
-    return state;
+      return state;
   }
 }
 const currentPage = (state = 0, action) => {
   switch (action.type) {
     case 'GO_TO_PAGE':
       return action.page
+    case 'GO_TO_NEXT_PAGE':
+      if(state+1 === tripDates(undefined,action).pages.length){
+        return state;
+      }else{
+        return state+1;
+      }
+    default:
+      return state;
+  }
+};
+
+const formCompleted = (state = false, action) => {
+  switch(action.type){
+    case 'FORM_COMPLETED':
+      return true;
+    case 'FORM_INCOMPLETE':
+      return false;
     default:
       return state;
   }
@@ -67,6 +88,7 @@ const expensesApp = combineReducers({
   tripDates,
   entries,
   currentPage
+  //formCompleted
 });
 
 
@@ -80,10 +102,51 @@ const setDates = (startDate,endDate) => {
 };
 
 const setCurrentPage = (page) => {
+  console.log("SET");
   return {
     type: 'GO_TO_PAGE',
     page
   }
 };
+const nextPage = () => {
+  console.log("NEXT");
+  return {
+    type: 'GO_TO_NEXT_PAGE'
+  }
+};
 
-export {expensesApp, setDates};
+const addEntry = (data,page) => {
+  //todo----
+  return {
+    type: 'ADD_ENTRY',
+    data
+  }
+};
+
+export {expensesApp, setDates, setCurrentPage, nextPage, addEntry};
+
+/*------------------- AJAX Calls ------------------------*/
+const createTripExpense = (trip) => {
+
+    let saveTrip = new Promise(function(resolve, reject){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','http://localhost:3000/api/expenses',true);
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onload = function(){
+      if(xhr.status ==200){
+        resolve(JSON.parse(xhr.response));
+      }else{
+        reject(JSON.parse(xhr.response));
+      }
+    };
+    xhr.onerror = function() {
+        reject(Error("Network Error"));
+    };
+    xhr.send(JSON.stringify(trip));
+  });
+  saveTrip.then(function(response){
+      alert('save successful');
+  },function(error){
+      alert(error.message)
+  });
+}

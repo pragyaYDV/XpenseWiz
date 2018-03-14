@@ -1,0 +1,21 @@
+@import './variables.less';
+
+.trip-details{
+  color: @theme-dark;
+  form{
+    div{
+      margin-top: 20px;
+    }
+    button{
+      background-color: @theme-disabled;
+      padding: 20px;
+      border-radius: 0;
+      border: 0;
+      margin-top: 20px;
+      &.active{
+          background-color: @theme-highlight;
+      }
+    }
+  }
+
+}

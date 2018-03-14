@@ -1,5 +1,5 @@
-webpackJsonp([0],Array(21).concat([
-/* 21 */
+webpackJsonp([0],Array(22).concat([
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18,7 +18,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,7 +46,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83,7 +83,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -155,14 +155,17 @@ function isPlainObject(value) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expensesApp", function() { return expensesApp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDates", function() { return setDates; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentPage", function() { return setCurrentPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nextPage", function() { return nextPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEntry", function() { return addEntry; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
 
 
 const initialState = {
@@ -175,7 +178,7 @@ const initialState = {
     entries: [],
     currentPage: 0
   },
-  purchases: null
+  purchaseData: {}
 }
 /* harmony export (immutable) */ __webpack_exports__["initialState"] = initialState;
 
@@ -189,7 +192,7 @@ const tripDates = (state = initialState.tripData.tripDates, action) => {
       let endDate = new Date(action.endDate);
         while(startDate<=endDate){
           pages.push({
-            page: count,
+            pageNumber: count,
             date: startDate
           });
           startDate.setDate(startDate.getDate() + 1);
@@ -201,30 +204,51 @@ const tripDates = (state = initialState.tripData.tripDates, action) => {
             pages: pages
         });
     default:
-    console.log("returning default");
       return state;
   }
 }
 const entries = (state = [], action) => {
   switch(action.type){
+
     case "ADD_ENTRY":
-      if(currentPage == state.length)
-        return [...state, action.details];
-      else{
-        return state.map((cur,i) => {
-          if(i==currentPage){
-            return action.details;
+        createTripExpense(action.data);
+        return [...state, action.data];
+
+    case "EDIT_ENTRY":
+        let newState = state.map((entry,i)=>{
+          if(i===action.page){
+            return action.data;
+          }else{
+            return entry;
           }
         });
-      }
+        return newState;
+
     default:
-    return state;
+      return state;
   }
 }
 const currentPage = (state = 0, action) => {
   switch (action.type) {
     case 'GO_TO_PAGE':
       return action.page
+    case 'GO_TO_NEXT_PAGE':
+      if(state+1 === tripDates(undefined,action).pages.length){
+        return state;
+      }else{
+        return state+1;
+      }
+    default:
+      return state;
+  }
+};
+
+const formCompleted = (state = false, action) => {
+  switch(action.type){
+    case 'FORM_COMPLETED':
+      return true;
+    case 'FORM_INCOMPLETE':
+      return false;
     default:
       return state;
   }
@@ -234,6 +258,7 @@ const expensesApp = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"
   tripDates,
   entries,
   currentPage
+  //formCompleted
 });
 
 
@@ -247,17 +272,58 @@ const setDates = (startDate,endDate) => {
 };
 
 const setCurrentPage = (page) => {
+  console.log("SET");
   return {
     type: 'GO_TO_PAGE',
     page
   }
 };
+const nextPage = () => {
+  console.log("NEXT");
+  return {
+    type: 'GO_TO_NEXT_PAGE'
+  }
+};
+
+const addEntry = (data,page) => {
+  //todo----
+  return {
+    type: 'ADD_ENTRY',
+    data
+  }
+};
 
 
+
+/*------------------- AJAX Calls ------------------------*/
+const createTripExpense = (trip) => {
+
+    let saveTrip = new Promise(function(resolve, reject){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','http://localhost:3000/api/expenses',true);
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onload = function(){
+      if(xhr.status ==200){
+        resolve(JSON.parse(xhr.response));
+      }else{
+        reject(JSON.parse(xhr.response));
+      }
+    };
+    xhr.onerror = function() {
+        reject(Error("Network Error"));
+    };
+    xhr.send(JSON.stringify(trip));
+  });
+  saveTrip.then(function(response){
+      alert('save successful');
+  },function(error){
+      alert(error.message)
+  });
+}
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /*
@@ -339,7 +405,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -711,7 +777,6 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 28 */,
 /* 29 */,
 /* 30 */,
 /* 31 */,
@@ -1062,7 +1127,7 @@ selectorFactory) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["b"] = createStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(106);
 
 
@@ -1505,8 +1570,8 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(23);
 
 
 
@@ -1517,37 +1582,7 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(117);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(27)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trips.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trips.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
+/* 53 */,
 /* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1564,13 +1599,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(53);
+__webpack_require__(129);
 
-var _store = __webpack_require__(25);
+var _store = __webpack_require__(26);
 
-var _reactRedux = __webpack_require__(21);
+var _reactRedux = __webpack_require__(22);
 
-var _reactRouterDom = __webpack_require__(35);
+var _reactRouterDom = __webpack_require__(12);
 
 var _Utils = __webpack_require__(119);
 
@@ -1583,166 +1618,275 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var BreadCrumb = function BreadCrumb(_ref) {
-  var pages = _ref.pages;
+  var pages = _ref.pages,
+      currentPage = _ref.currentPage,
+      changePage = _ref.changePage;
 
-  console.log(pages);
   return _react2.default.createElement(
     'div',
     { className: 'bread-crumbs' },
     pages.map(function (page) {
       return _react2.default.createElement(
         'button',
-        { key: "page" + page.page },
+        { key: "page" + page.pageNumber, onClick: function onClick() {
+            return changePage(page.pageNumber);
+          }, className: page.pageNumber == currentPage ? 'current' : '' },
         _Utils.DateManager.formatDate(page.date)
       );
     })
   );
 };
 
+var TripForm = function TripForm(_ref2) {
+  var entry = _ref2.entry,
+      saveAndNext = _ref2.saveAndNext;
+
+  var el = {};
+  return _react2.default.createElement(
+    'form',
+    null,
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'h3',
+        null,
+        'Trasport'
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Type'
+      ),
+      _react2.default.createElement(
+        'select',
+        { name: 'trasportType', ref: function ref(input) {
+            return el.trasportType = input;
+          } },
+        _react2.default.createElement(
+          'option',
+          { value: '' },
+          'Select'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'air' },
+          'Air Transport'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'local' },
+          'Local Transport'
+        )
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Vendor'
+      ),
+      _react2.default.createElement('input', { type: 'text', name: 'trasportVendor', defaultValue: entry.transport.vendor, ref: function ref(input) {
+          return el.trasportVendor = input;
+        } }),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Amount'
+      ),
+      _react2.default.createElement('input', { name: 'trasportAmt', defaultValue: entry.transport.amount, ref: function ref(input) {
+          return el.trasportAmt = input;
+        } }),
+      _react2.default.createElement(
+        'label',
+        { htmlFor: 'file' },
+        'Add Transport Receipt'
+      ),
+      _react2.default.createElement('input', { type: 'file', name: 'transportReceipt', accept: 'image/*', ref: function ref(input) {
+          return el.transportReceipt = input;
+        } })
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'h3',
+        null,
+        'Lodging'
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Start Date:'
+      ),
+      _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
+          return el.lodgeStartDate = input;
+        }, name: 'startDate', onChange: el.onDateChange }),
+      _react2.default.createElement(
+        'label',
+        null,
+        'End Date:'
+      ),
+      _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
+          return el.lodgeEndDate = input;
+        }, name: 'endDate', onChange: el.onDateChange }),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Vendor'
+      ),
+      _react2.default.createElement('input', { type: 'text', name: 'vendor', defaultValue: entry.lodging.vendor, ref: function ref(input) {
+          return el.lodgeVendor = input;
+        } }),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Amount'
+      ),
+      _react2.default.createElement('input', { name: 'lodgeAmount', defaultValue: entry.lodging.vendor, ref: function ref(input) {
+          return el.lodgeAmt = input;
+        } }),
+      _react2.default.createElement(
+        'button',
+        { name: 'addLodgeReceipt' },
+        'Add Receipt'
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'h3',
+        null,
+        'Meals'
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Breakfast'
+      ),
+      _react2.default.createElement('input', { name: 'breakfastVendor', defaultValue: entry.meals.breakfast.vendor, ref: function ref(input) {
+          return el.breakfastVendor = input;
+        } }),
+      _react2.default.createElement('input', { name: 'breakfastAmt', defaultValue: entry.meals.breakfast.amount, ref: function ref(input) {
+          return el.breakfastAmt = input;
+        } }),
+      _react2.default.createElement(
+        'button',
+        { name: 'addBreakfastReceipt' },
+        'Add Receipt'
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Lunch'
+      ),
+      _react2.default.createElement('input', { name: 'lunchVendor', defaultValue: entry.meals.lunch.vendor, ref: function ref(input) {
+          return el.lunchVendor = input;
+        } }),
+      _react2.default.createElement('input', { name: 'lunchAmt', defaultValue: entry.meals.lunch.amount, ref: function ref(input) {
+          return el.lunchAmt = input;
+        } }),
+      _react2.default.createElement(
+        'button',
+        { name: 'addLunchReceipt' },
+        'Add Receipt'
+      ),
+      _react2.default.createElement(
+        'label',
+        null,
+        'Dinner'
+      ),
+      _react2.default.createElement('input', { name: 'dinnerVendor', defaultValue: entry.meals.dinner.vendor, ref: function ref(input) {
+          return el.dinnerVendor = input;
+        } }),
+      _react2.default.createElement('input', { name: 'dinnerAmt', defaultValue: entry.meals.dinner.amount, ref: function ref(input) {
+          return el.dinnerAmt = input;
+        } }),
+      _react2.default.createElement(
+        'button',
+        { name: 'addDinnerReceipt' },
+        'Add Receipt'
+      )
+    ),
+    _react2.default.createElement(
+      'button',
+      { type: 'button', onClick: function onClick() {
+          return saveAndNext(el);
+        } },
+      ' Next '
+    )
+  );
+};
+
 var TripDetails = function (_React$Component) {
   _inherits(TripDetails, _React$Component);
 
-  function TripDetails() {
+  function TripDetails(props) {
     _classCallCheck(this, TripDetails);
 
-    var _this = _possibleConstructorReturn(this, (TripDetails.__proto__ || Object.getPrototypeOf(TripDetails)).call(this));
+    var _this = _possibleConstructorReturn(this, (TripDetails.__proto__ || Object.getPrototypeOf(TripDetails)).call(this, props));
 
-    _this.state = {};
-    _this.nextClick = _this.nextClick.bind(_this);
+    _this.changePage = _this.changePage.bind(_this);
+    _this.saveAndNext = _this.saveAndNext.bind(_this);
+    _this.state = {
+      errorState: false
+      //entry: props.entry
+    };
     return _this;
   }
 
   _createClass(TripDetails, [{
-    key: 'nextClick',
-    value: function nextClick(e) {
-      e.preventDefault();
+    key: 'changePage',
+    value: function changePage(pageNum) {
+      console.log('change');
+      this.props.dispatch((0, _store.setCurrentPage)(pageNum));
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps.currentPage != this.props.currentPage) return true;
+    }
+  }, {
+    key: 'saveAndNext',
+    value: function saveAndNext(el) {
+      var entry = {
+        transport: {},
+        lodging: {},
+        meals: {
+          breakfast: {},
+          lunch: {},
+          dinner: {}
+        }
+      };
+      entry.transport.type = el.trasportType.value;
+      entry.transport.vendor = el.trasportVendor.value;
+      entry.transport.amount = el.trasportAmt.value;
+      entry.transport.receipt = el.transportReceipt.files;
+
+      entry.lodging.vendor = el.lodgeVendor.value;
+      entry.lodging.amount = el.lodgeAmt.value;
+
+      entry.meals.breakfast.vendor = el.breakfastVendor.value;
+      entry.meals.breakfast.amount = el.breakfastAmt.value;
+
+      entry.meals.lunch.vendor = el.lunchVendor.value;
+      entry.meals.lunch.amount = el.lunchAmt.value;
+
+      entry.meals.dinner.vendor = el.dinnerVendor.value;
+      entry.meals.dinner.amount = el.dinnerAmt.value;
+
+      this.props.dispatch((0, _store.addEntry)(entry, this.props.currentPage));
+      this.props.dispatch((0, _store.nextPage)());
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
+      var entry = this.props.entry;
+      //const entry = this.state.entry;
       return _react2.default.createElement(
         'div',
         { className: 'trip-details' },
-        _react2.default.createElement(BreadCrumb, null),
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Trasport'
-            ),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Type'
-            ),
-            _react2.default.createElement('select', { ref: function ref(input) {
-                return _this2.trasportType = input;
-              }, name: 'trasportType', onChange: this.onTransportChange }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Vendor'
-            ),
-            _react2.default.createElement('input', { type: 'text', name: 'vendor' }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Amount'
-            ),
-            _react2.default.createElement('input', { name: 'tripAmount' }),
-            _react2.default.createElement(
-              'button',
-              { name: 'addTransportReceipt' },
-              'Add Receipt'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Lodging'
-            ),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Start Date:'
-            ),
-            _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
-                return _this2.lodgeStartDate = input;
-              }, name: 'startDate', onChange: this.onDateChange }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'End Date:'
-            ),
-            _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
-                return _this2.lodgeEndDate = input;
-              }, name: 'endDate', onChange: this.onDateChange }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Vendor'
-            ),
-            _react2.default.createElement('input', { type: 'text', name: 'vendor' }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Amount'
-            ),
-            _react2.default.createElement('input', { name: 'lodgeAmount' }),
-            _react2.default.createElement(
-              'button',
-              { name: 'addLodgeReceipt' },
-              'Add Receipt'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Meals'
-            ),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Breakfast'
-            ),
-            _react2.default.createElement('input', { name: 'breakfast' }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Lunch'
-            ),
-            _react2.default.createElement('input', { name: 'lunch' }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Dinner'
-            ),
-            _react2.default.createElement('input', { name: 'dinner' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: "error " + (this.state.errorState ? '' : 'hide') },
-            'The end date cannot be less than the start date.'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: this.state.nextBtn, onClick: this.nextClick },
-            'Next'
-          )
-        )
+        _react2.default.createElement(BreadCrumb, { pages: this.props.pages, currentPage: this.props.currentPage, changePage: this.changePage }),
+        _react2.default.createElement(TripForm, { entry: entry, saveAndNext: this.saveAndNext, key: this.props.currentPage })
       );
     }
   }]);
@@ -1751,17 +1895,23 @@ var TripDetails = function (_React$Component) {
 }(_react2.default.Component);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log("HERE 1");
-  console.log(state.tripDates);
   return {
-    entries: state.entries,
-    pages: state.tripDates.pages
+    entry: state.entries[state.currentPage] ? state.entries[state.currentPage] : {
+      transport: {},
+      lodging: {},
+      meals: {
+        breakfast: {},
+        lunch: {},
+        dinner: {}
+      }
+    },
+    pages: state.tripDates.pages,
+    currentPage: state.currentPage,
+    formCompletd: state.formCompletd
   };
 };
 
-TripDetails = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(TripDetails));
-
-exports.default = TripDetails;
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(TripDetails));
 
 /***/ }),
 /* 55 */
@@ -1774,17 +1924,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(28);
+var _reactDom = __webpack_require__(29);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(35);
+var _reactRouterDom = __webpack_require__(12);
 
-var _reactRedux = __webpack_require__(21);
+var _reactRedux = __webpack_require__(22);
 
-var _redux = __webpack_require__(23);
+var _redux = __webpack_require__(24);
 
-var _store = __webpack_require__(25);
+var _store = __webpack_require__(26);
 
 var _TripsHome = __webpack_require__(116);
 
@@ -1905,7 +2055,7 @@ _reactDom2.default.render(_react2.default.createElement(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_PropTypes__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(23);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2240,7 +2390,7 @@ function shallowEqual(objA, objB) {
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(51);
 
 
@@ -2575,7 +2725,7 @@ function symbolObservablePonyfill(root) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(49);
 
 
@@ -3017,7 +3167,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(23);
 
 
 function verify(selector, methodName, displayName) {
@@ -3053,13 +3203,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(53);
+__webpack_require__(127);
 
-var _store = __webpack_require__(25);
+var _store = __webpack_require__(26);
 
-var _reactRedux = __webpack_require__(21);
+var _reactRedux = __webpack_require__(22);
 
-var _reactRouterDom = __webpack_require__(35);
+var _reactRouterDom = __webpack_require__(12);
 
 var _TripDetails = __webpack_require__(54);
 
@@ -3096,7 +3246,7 @@ var TripsHome = function (_React$Component) {
       var nextBtn = "",
           errorState = false;
       if (this.startDate.value && this.endDate.value) {
-        if (new Date(this.startDate.value) < new Date(this.endDate.value)) {
+        if (new Date(this.startDate.value) <= new Date(this.endDate.value)) {
           nextBtn = "active";
           errorState = false;
         } else {
@@ -3157,9 +3307,9 @@ var TripsHome = function (_React$Component) {
             'The end date cannot be less than the start date.'
           ),
           _react2.default.createElement(
-            'a',
-            { className: this.state.nextBtn, onClick: this.nextClick, href: '/tripDetails' },
-            'Next'
+            _reactRouterDom.Link,
+            { to: '/tripDetails', onClick: this.nextClick },
+            'All Issues'
           )
         )
       );
@@ -3169,23 +3319,11 @@ var TripsHome = function (_React$Component) {
   return TripsHome;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)()(TripsHome));
+TripsHome = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)()(TripsHome));
+exports.default = TripsHome;
 
 /***/ }),
-/* 117 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(26)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".trip-dates {\n  color: #544a45;\n}\n.trip-dates p {\n  text-align: center;\n}\n.trip-dates form div {\n  margin-top: 20px;\n}\n.trip-dates form button {\n  background-color: #c6beba;\n  padding: 20px;\n  border-radius: 0;\n  border: 0;\n  margin-top: 20px;\n}\n.trip-dates form button.active {\n  background-color: #f2c3b8;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 117 */,
 /* 118 */
 /***/ (function(module, exports) {
 
@@ -3410,7 +3548,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(27)(content, options);
+var update = __webpack_require__(28)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -3430,7 +3568,7 @@ if(false) {
 /* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(26)(false);
+exports = module.exports = __webpack_require__(27)(false);
 // imports
 
 
@@ -3455,7 +3593,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(27)(content, options);
+var update = __webpack_require__(28)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -3475,12 +3613,103 @@ if(false) {
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(26)(false);
+exports = module.exports = __webpack_require__(27)(false);
 // imports
 
 
 // module
 exports.push([module.i, "* {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n  font-family: Arial;\n}\nheader {\n  padding: 30px;\n  text-align: center;\n  background-color: #f25d37;\n  color: white;\n  margin-bottom: 20px;\n}\n.container {\n  margin: 0 auto;\n}\n.hide {\n  display: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 126 */,
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(128);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(28)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(27)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".trip-dates {\n  color: #544a45;\n}\n.trip-dates p {\n  text-align: center;\n}\n.trip-dates form div {\n  margin-top: 20px;\n}\n.trip-dates form button {\n  background-color: #c6beba;\n  padding: 20px;\n  border-radius: 0;\n  border: 0;\n  margin-top: 20px;\n}\n.trip-dates form button.active {\n  background-color: #f2c3b8;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(130);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(28)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(27)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".trip-details {\n  color: #544a45;\n}\n.trip-details form div {\n  margin-top: 20px;\n}\n.trip-details form button {\n  background-color: #c6beba;\n  padding: 20px;\n  border-radius: 0;\n  border: 0;\n  margin-top: 20px;\n}\n.trip-details form button.active {\n  background-color: #f2c3b8;\n}\n", ""]);
 
 // exports
 
