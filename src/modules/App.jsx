@@ -23,7 +23,7 @@ let App = () => (
       <header>
           <div>XpenseWiz</div>
       </header>
-      <div className="content">
+      <div  className="container" >
         <Switch>
           <Route exact path="/" render={()=><Redirect to="/home" />} />
           <Route path="/tripDetails" component={TripDetails} />
@@ -33,8 +33,6 @@ let App = () => (
           <Route path="*" component={NoMatch} />
         </Switch>
       </div>
-
-
     </div>
   </BrowserRouter>
 );

@@ -1,9 +1,11 @@
 @import './variables.less';
+
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: Arial;
+    font-size: 18px;
 }
 
 header{
@@ -13,15 +15,34 @@ header{
   color: white;
   margin-bottom: 20px;
 }
-.container{
-
-  margin: 0 auto;
-}
 
 .hide{
   display: none;
 }
 
-@media screen and (min-width: 960px){
+input{
+  border-radius: 5px;
+  border: 1px solid @theme-light-border;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+}
+label{
+  color: @theme-light-font;
+  display: inline-block;
+  margin-top: 15px;
+}
+.cf::after{
+  content: '';
+  display: block;
+  clear: both;
+}
 
+@media screen and (min-width: 960px){
+  .container{
+    max-width: 840px;
+    margin: 0 auto;
+  }
 }

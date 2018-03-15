@@ -1,329 +1,19 @@
-webpackJsonp([0],Array(22).concat([
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(95);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
-
-
-
-
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = warning;
-/**
- * Prints a warning in the console if it exists.
- *
- * @param {String} message The warning message.
- * @returns {void}
- */
-function warning(message) {
-  /* eslint-disable no-console */
-  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-    console.error(message);
-  }
-  /* eslint-enable no-console */
-  try {
-    // This error was thrown as a convenience so that if you enable
-    // "break on all exceptions" in your console,
-    // it would pause the execution at this line.
-    throw new Error(message);
-    /* eslint-disable no-empty */
-  } catch (e) {}
-  /* eslint-enable no-empty */
-}
-
-/***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(49);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return __WEBPACK_IMPORTED_MODULE_4__compose__["a"]; });
-
-
-
-
-
-
-
-/*
-* This is a dummy function to check if the function name has been altered by minification.
-* If the function has been minified and NODE_ENV !== 'production', warn the user.
-*/
-function isCrushed() {}
-
-if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-  Object(__WEBPACK_IMPORTED_MODULE_5__utils_warning__["a" /* default */])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-}
-
-
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(105);
-
-
-
-
-/** `Object#toString` result references. */
-var objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to infer the `Object` constructor. */
-var objectCtorString = funcToString.call(Object);
-
-/**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- *
- * @static
- * @memberOf _
- * @since 0.8.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * _.isPlainObject(new Foo);
- * // => false
- *
- * _.isPlainObject([1, 2, 3]);
- * // => false
- *
- * _.isPlainObject({ 'x': 0, 'y': 0 });
- * // => true
- *
- * _.isPlainObject(Object.create(null));
- * // => true
- */
-function isPlainObject(value) {
-  if (!Object(__WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__["a" /* default */])(value) || Object(__WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__["a" /* default */])(value) != objectTag) {
-    return false;
-  }
-  var proto = Object(__WEBPACK_IMPORTED_MODULE_1__getPrototype_js__["a" /* default */])(value);
-  if (proto === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
-    funcToString.call(Ctor) == objectCtorString;
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (isPlainObject);
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expensesApp", function() { return expensesApp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDates", function() { return setDates; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentPage", function() { return setCurrentPage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nextPage", function() { return nextPage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEntry", function() { return addEntry; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
-
-
-const initialState = {
-  tripData: {
-    tripDates:{
-      startDate: null,
-      endDate: null,
-      pages: []
-    },
-    entries: [],
-    currentPage: 0
-  },
-  purchaseData: {}
-}
-/* harmony export (immutable) */ __webpack_exports__["initialState"] = initialState;
-
-/*--------------------- REDUCERS---------------_*/
-const tripDates = (state = initialState.tripData.tripDates, action) => {
-  switch (action.type) {
-    case "SET_DATES":
-      let count=0;
-      let pages = [];
-      let startDate = new Date(action.startDate);
-      let endDate = new Date(action.endDate);
-        while(startDate<=endDate){
-          pages.push({
-            pageNumber: count,
-            date: startDate
-          });
-          startDate.setDate(startDate.getDate() + 1);
-          count++;
-        }
-        return Object.assign({},state,{
-            startDate : action.startDate,
-            endDate : action.endDate,
-            pages: pages
-        });
-    default:
-      return state;
-  }
-}
-const entries = (state = [], action) => {
-  switch(action.type){
-
-    case "ADD_ENTRY":
-        createTripExpense(action.data);
-        return [...state, action.data];
-
-    case "EDIT_ENTRY":
-        let newState = state.map((entry,i)=>{
-          if(i===action.page){
-            return action.data;
-          }else{
-            return entry;
-          }
-        });
-        return newState;
-
-    default:
-      return state;
-  }
-}
-const currentPage = (state = 0, action) => {
-  switch (action.type) {
-    case 'GO_TO_PAGE':
-      return action.page
-    case 'GO_TO_NEXT_PAGE':
-      if(state+1 === tripDates(undefined,action).pages.length){
-        return state;
-      }else{
-        return state+1;
-      }
-    default:
-      return state;
-  }
-};
-
-const formCompleted = (state = false, action) => {
-  switch(action.type){
-    case 'FORM_COMPLETED':
-      return true;
-    case 'FORM_INCOMPLETE':
-      return false;
-    default:
-      return state;
-  }
-};
-
-const expensesApp = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
-  tripDates,
-  entries,
-  currentPage
-  //formCompleted
-});
-
-
-/*---------------------- Action creators -------------*/
-const setDates = (startDate,endDate) => {
-  return {
-    type: 'SET_DATES',
-    startDate,
-    endDate
-  }
-};
-
-const setCurrentPage = (page) => {
-  console.log("SET");
-  return {
-    type: 'GO_TO_PAGE',
-    page
-  }
-};
-const nextPage = () => {
-  console.log("NEXT");
-  return {
-    type: 'GO_TO_NEXT_PAGE'
-  }
-};
-
-const addEntry = (data,page) => {
-  //todo----
-  return {
-    type: 'ADD_ENTRY',
-    data
-  }
-};
-
-
-
-/*------------------- AJAX Calls ------------------------*/
-const createTripExpense = (trip) => {
-
-    let saveTrip = new Promise(function(resolve, reject){
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:3000/api/expenses',true);
-    xhr.setRequestHeader("Content-Type","application/json");
-    xhr.onload = function(){
-      if(xhr.status ==200){
-        resolve(JSON.parse(xhr.response));
-      }else{
-        reject(JSON.parse(xhr.response));
-      }
-    };
-    xhr.onerror = function() {
-        reject(Error("Network Error"));
-    };
-    xhr.send(JSON.stringify(trip));
-  });
-  saveTrip.then(function(response){
-      alert('save successful');
-  },function(error){
-      alert(error.message)
-  });
-}
-
-
-/***/ }),
-/* 27 */
+webpackJsonp([0],[
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports) {
 
 /*
@@ -405,7 +95,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 28 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -777,6 +467,337 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(94);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
+
+
+
+
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = warning;
+/**
+ * Prints a warning in the console if it exists.
+ *
+ * @param {String} message The warning message.
+ * @returns {void}
+ */
+function warning(message) {
+  /* eslint-disable no-console */
+  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+    console.error(message);
+  }
+  /* eslint-enable no-console */
+  try {
+    // This error was thrown as a convenience so that if you enable
+    // "break on all exceptions" in your console,
+    // it would pause the execution at this line.
+    throw new Error(message);
+    /* eslint-disable no-empty */
+  } catch (e) {}
+  /* eslint-enable no-empty */
+}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(49);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return __WEBPACK_IMPORTED_MODULE_4__compose__["a"]; });
+
+
+
+
+
+
+
+/*
+* This is a dummy function to check if the function name has been altered by minification.
+* If the function has been minified and NODE_ENV !== 'production', warn the user.
+*/
+function isCrushed() {}
+
+if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+  Object(__WEBPACK_IMPORTED_MODULE_5__utils_warning__["a" /* default */])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+}
+
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(104);
+
+
+
+
+/** `Object#toString` result references. */
+var objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to infer the `Object` constructor. */
+var objectCtorString = funcToString.call(Object);
+
+/**
+ * Checks if `value` is a plain object, that is, an object created by the
+ * `Object` constructor or one with a `[[Prototype]]` of `null`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.8.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ * }
+ *
+ * _.isPlainObject(new Foo);
+ * // => false
+ *
+ * _.isPlainObject([1, 2, 3]);
+ * // => false
+ *
+ * _.isPlainObject({ 'x': 0, 'y': 0 });
+ * // => true
+ *
+ * _.isPlainObject(Object.create(null));
+ * // => true
+ */
+function isPlainObject(value) {
+  if (!Object(__WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__["a" /* default */])(value) || Object(__WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__["a" /* default */])(value) != objectTag) {
+    return false;
+  }
+  var proto = Object(__WEBPACK_IMPORTED_MODULE_1__getPrototype_js__["a" /* default */])(value);
+  if (proto === null) {
+    return true;
+  }
+  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
+    funcToString.call(Ctor) == objectCtorString;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (isPlainObject);
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expensesApp", function() { return expensesApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDates", function() { return setDates; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentPage", function() { return setCurrentPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nextPage", function() { return nextPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEntry", function() { return addEntry; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(26);
+
+
+const initialState = {
+  tripData: {
+    tripDates:{
+      startDate: null,
+      endDate: null,
+      pages: []
+    },
+    entries: [],
+    currentPage: 0
+  },
+  purchaseData: {}
+}
+/* harmony export (immutable) */ __webpack_exports__["initialState"] = initialState;
+
+/*--------------------- REDUCERS---------------_*/
+const tripDates = (state = initialState.tripData.tripDates, action) => {
+  switch (action.type) {
+    case "SET_DATES":
+      let count=0;
+      let pages = [];
+      let startDate = new Date(action.startDate);
+      let endDate = new Date(action.endDate);
+        while(startDate<=endDate){
+          pages.push({
+            pageNumber: count,
+            date: startDate
+          });
+          startDate.setDate(startDate.getDate() + 1);
+          count++;
+        }
+        return Object.assign({},state,{
+            startDate : action.startDate,
+            endDate : action.endDate,
+            pages: pages
+        });
+    default:
+      return state;
+  }
+}
+const entries = (state = [], action) => {
+  switch(action.type){
+
+    case "ADD_ENTRY":
+        createTripExpense(action.data);
+        return [...state, action.data];
+
+    case "EDIT_ENTRY":
+        let newState = state.map((entry,i)=>{
+          if(i===action.page){
+            return action.data;
+          }else{
+            return entry;
+          }
+        });
+        return newState;
+
+    default:
+      return state;
+  }
+}
+const currentPage = (state = 0, action) => {
+  switch (action.type) {
+    case 'GO_TO_PAGE':
+      return action.page
+    case 'GO_TO_NEXT_PAGE':
+      if(state+1 === tripDates(undefined,action).pages.length){
+        return state;
+      }else{
+        return state+1;
+      }
+    default:
+      return state;
+  }
+};
+
+const formCompleted = (state = false, action) => {
+  switch(action.type){
+    case 'FORM_COMPLETED':
+      return true;
+    case 'FORM_INCOMPLETE':
+      return false;
+    default:
+      return state;
+  }
+};
+
+const expensesApp = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
+  tripDates,
+  entries,
+  currentPage
+  //formCompleted
+});
+
+
+/*---------------------- Action creators -------------*/
+const setDates = (startDate,endDate) => {
+  return {
+    type: 'SET_DATES',
+    startDate,
+    endDate
+  }
+};
+
+const setCurrentPage = (page) => {
+  console.log("SET");
+  return {
+    type: 'GO_TO_PAGE',
+    page
+  }
+};
+const nextPage = () => {
+  console.log("NEXT");
+  return {
+    type: 'GO_TO_NEXT_PAGE'
+  }
+};
+
+const addEntry = (data,page) => {
+  //todo----
+  return {
+    type: 'ADD_ENTRY',
+    data
+  }
+};
+
+
+
+/*------------------- AJAX Calls ------------------------*/
+const createTripExpense = (trip) => {
+    let saveTrip = new Promise(function(resolve, reject){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','http://localhost:3000/api/expenses',true);
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onload = function(){
+      if(xhr.status ==200){
+        resolve(JSON.parse(xhr.response));
+      }else{
+        reject(JSON.parse(xhr.response));
+      }
+    };
+    xhr.onerror = function() {
+        reject(Error("Network Error"));
+    };
+    xhr.send(JSON.stringify(trip));
+  });
+  saveTrip.then(function(response){
+      alert('save successful');
+  },function(error){
+      alert(error.message)
+  });
+}
+
+
+/***/ }),
 /* 29 */,
 /* 30 */,
 /* 31 */,
@@ -827,7 +848,7 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_Subscription__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_Subscription__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_PropTypes__ = __webpack_require__(44);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1127,8 +1148,8 @@ selectorFactory) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["b"] = createStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(105);
 
 
 
@@ -1383,7 +1404,7 @@ var ActionTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(98);
 
 
 /** Built-in value references. */
@@ -1570,8 +1591,8 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(25);
 
 
 
@@ -1582,8 +1603,7 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 53 */,
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1599,15 +1619,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(129);
+__webpack_require__(119);
 
-var _store = __webpack_require__(26);
+var _store = __webpack_require__(28);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(24);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _Utils = __webpack_require__(119);
+var _Utils = __webpack_require__(121);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1646,7 +1666,7 @@ var TripForm = function TripForm(_ref2) {
     'form',
     null,
     _react2.default.createElement(
-      'div',
+      'section',
       null,
       _react2.default.createElement(
         'h3',
@@ -1654,58 +1674,66 @@ var TripForm = function TripForm(_ref2) {
         'Trasport'
       ),
       _react2.default.createElement(
-        'label',
-        null,
-        'Type'
-      ),
-      _react2.default.createElement(
-        'select',
-        { name: 'trasportType', ref: function ref(input) {
-            return el.trasportType = input;
-          } },
+        'div',
+        { className: 'fields' },
         _react2.default.createElement(
-          'option',
-          { value: '' },
-          'Select'
+          'label',
+          null,
+          'Type'
         ),
         _react2.default.createElement(
-          'option',
-          { value: 'air' },
-          'Air Transport'
+          'select',
+          { name: 'trasportType', ref: function ref(input) {
+              return el.trasportType = input;
+            } },
+          _react2.default.createElement(
+            'option',
+            { value: '' },
+            'Select'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'air' },
+            'Air Transport'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'local' },
+            'Local Transport'
+          )
         ),
         _react2.default.createElement(
-          'option',
-          { value: 'local' },
-          'Local Transport'
+          'label',
+          null,
+          'Vendor'
+        ),
+        _react2.default.createElement('input', { type: 'text', name: 'trasportVendor', defaultValue: entry.transport.vendor, ref: function ref(input) {
+            return el.trasportVendor = input;
+          } }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Amount'
+        ),
+        _react2.default.createElement('input', { name: 'trasportAmt', defaultValue: entry.transport.amount, ref: function ref(input) {
+            return el.trasportAmt = input;
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'cf' },
+          _react2.default.createElement(
+            'label',
+            { className: 'file' },
+            'Transport Receipt',
+            _react2.default.createElement('input', { type: 'file', accept: 'image/*', name: 'transportReceipt', ref: function ref(input) {
+                return el.transportReceipt = input;
+              } })
+          )
         )
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Vendor'
-      ),
-      _react2.default.createElement('input', { type: 'text', name: 'trasportVendor', defaultValue: entry.transport.vendor, ref: function ref(input) {
-          return el.trasportVendor = input;
-        } }),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Amount'
-      ),
-      _react2.default.createElement('input', { name: 'trasportAmt', defaultValue: entry.transport.amount, ref: function ref(input) {
-          return el.trasportAmt = input;
-        } }),
-      _react2.default.createElement(
-        'label',
-        { htmlFor: 'file' },
-        'Add Transport Receipt'
-      ),
-      _react2.default.createElement('input', { type: 'file', name: 'transportReceipt', accept: 'image/*', ref: function ref(input) {
-          return el.transportReceipt = input;
-        } })
+      )
     ),
     _react2.default.createElement(
-      'div',
+      'section',
       null,
       _react2.default.createElement(
         'h3',
@@ -1713,45 +1741,56 @@ var TripForm = function TripForm(_ref2) {
         'Lodging'
       ),
       _react2.default.createElement(
-        'label',
-        null,
-        'Start Date:'
-      ),
-      _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
-          return el.lodgeStartDate = input;
-        }, name: 'startDate', onChange: el.onDateChange }),
-      _react2.default.createElement(
-        'label',
-        null,
-        'End Date:'
-      ),
-      _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
-          return el.lodgeEndDate = input;
-        }, name: 'endDate', onChange: el.onDateChange }),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Vendor'
-      ),
-      _react2.default.createElement('input', { type: 'text', name: 'vendor', defaultValue: entry.lodging.vendor, ref: function ref(input) {
-          return el.lodgeVendor = input;
-        } }),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Amount'
-      ),
-      _react2.default.createElement('input', { name: 'lodgeAmount', defaultValue: entry.lodging.vendor, ref: function ref(input) {
-          return el.lodgeAmt = input;
-        } }),
-      _react2.default.createElement(
-        'button',
-        { name: 'addLodgeReceipt' },
-        'Add Receipt'
+        'div',
+        { className: 'fields' },
+        _react2.default.createElement(
+          'label',
+          null,
+          'Start Date:'
+        ),
+        _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
+            return el.lodgeStartDate = input;
+          }, name: 'startDate', onChange: el.onDateChange }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'End Date:'
+        ),
+        _react2.default.createElement('input', { type: 'date', ref: function ref(input) {
+            return el.lodgeEndDate = input;
+          }, name: 'endDate', onChange: el.onDateChange }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Vendor'
+        ),
+        _react2.default.createElement('input', { type: 'text', name: 'vendor', defaultValue: entry.lodging.vendor, ref: function ref(input) {
+            return el.lodgeVendor = input;
+          } }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Amount'
+        ),
+        _react2.default.createElement('input', { name: 'lodgeAmount', defaultValue: entry.lodging.vendor, ref: function ref(input) {
+            return el.lodgeAmt = input;
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'cf' },
+          _react2.default.createElement(
+            'label',
+            { className: 'file' },
+            'Lodging Reciept',
+            _react2.default.createElement('input', { type: 'file', accept: 'image/*', name: 'lodgeReceipt', ref: function ref(input) {
+                return el.lodgeReceipt = input;
+              } })
+          )
+        )
       )
     ),
     _react2.default.createElement(
-      'div',
+      'section',
       null,
       _react2.default.createElement(
         'h3',
@@ -1759,52 +1798,107 @@ var TripForm = function TripForm(_ref2) {
         'Meals'
       ),
       _react2.default.createElement(
-        'label',
-        null,
-        'Breakfast'
-      ),
-      _react2.default.createElement('input', { name: 'breakfastVendor', defaultValue: entry.meals.breakfast.vendor, ref: function ref(input) {
-          return el.breakfastVendor = input;
-        } }),
-      _react2.default.createElement('input', { name: 'breakfastAmt', defaultValue: entry.meals.breakfast.amount, ref: function ref(input) {
-          return el.breakfastAmt = input;
-        } }),
-      _react2.default.createElement(
-        'button',
-        { name: 'addBreakfastReceipt' },
-        'Add Receipt'
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Lunch'
-      ),
-      _react2.default.createElement('input', { name: 'lunchVendor', defaultValue: entry.meals.lunch.vendor, ref: function ref(input) {
-          return el.lunchVendor = input;
-        } }),
-      _react2.default.createElement('input', { name: 'lunchAmt', defaultValue: entry.meals.lunch.amount, ref: function ref(input) {
-          return el.lunchAmt = input;
-        } }),
-      _react2.default.createElement(
-        'button',
-        { name: 'addLunchReceipt' },
-        'Add Receipt'
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Dinner'
-      ),
-      _react2.default.createElement('input', { name: 'dinnerVendor', defaultValue: entry.meals.dinner.vendor, ref: function ref(input) {
-          return el.dinnerVendor = input;
-        } }),
-      _react2.default.createElement('input', { name: 'dinnerAmt', defaultValue: entry.meals.dinner.amount, ref: function ref(input) {
-          return el.dinnerAmt = input;
-        } }),
-      _react2.default.createElement(
-        'button',
-        { name: 'addDinnerReceipt' },
-        'Add Receipt'
+        'div',
+        { className: 'fields' },
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Breakfast'
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Vendor'
+        ),
+        _react2.default.createElement('input', { name: 'breakfastVendor', defaultValue: entry.meals.breakfast.vendor, ref: function ref(input) {
+            return el.breakfastVendor = input;
+          } }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Amount'
+        ),
+        _react2.default.createElement('input', { name: 'breakfastAmt', defaultValue: entry.meals.breakfast.amount, ref: function ref(input) {
+            return el.breakfastAmt = input;
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'cf' },
+          _react2.default.createElement(
+            'label',
+            { className: 'file' },
+            'Breakfast Receipt',
+            _react2.default.createElement('input', { type: 'file', accept: 'image/*', name: 'breakfastReceipt', ref: function ref(input) {
+                return el.breakfastReceipt = input;
+              } })
+          )
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Lunch'
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Vendor'
+        ),
+        _react2.default.createElement('input', { name: 'lunchVendor', defaultValue: entry.meals.lunch.vendor, ref: function ref(input) {
+            return el.lunchVendor = input;
+          } }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Amount'
+        ),
+        _react2.default.createElement('input', { name: 'lunchAmt', defaultValue: entry.meals.lunch.amount, ref: function ref(input) {
+            return el.lunchAmt = input;
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'cf' },
+          _react2.default.createElement(
+            'label',
+            { className: 'file' },
+            'Lunch Receipt',
+            _react2.default.createElement('input', { type: 'file', accept: 'image/*', name: 'lunchReceipt', ref: function ref(input) {
+                return el.lunchReceipt = input;
+              } })
+          )
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Dinner'
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Vendor'
+        ),
+        _react2.default.createElement('input', { name: 'dinnerVendor', defaultValue: entry.meals.dinner.vendor, ref: function ref(input) {
+            return el.dinnerVendor = input;
+          } }),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Amount'
+        ),
+        _react2.default.createElement('input', { name: 'dinnerAmt', defaultValue: entry.meals.dinner.amount, ref: function ref(input) {
+            return el.dinnerAmt = input;
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'cf' },
+          _react2.default.createElement(
+            'label',
+            { className: 'file' },
+            'Dinner Receipt',
+            _react2.default.createElement('input', { type: 'file', accept: 'image/*', name: 'dinnerReceipt', ref: function ref(input) {
+                return el.dinnerReceipt = input;
+              } })
+          )
+        )
       )
     ),
     _react2.default.createElement(
@@ -1860,7 +1954,7 @@ var TripDetails = function (_React$Component) {
       entry.transport.type = el.trasportType.value;
       entry.transport.vendor = el.trasportVendor.value;
       entry.transport.amount = el.trasportAmt.value;
-      entry.transport.receipt = el.transportReceipt.files;
+      //entry.transport.receipt = el.transportReceipt.files;
 
       entry.lodging.vendor = el.lodgeVendor.value;
       entry.lodging.amount = el.lodgeAmt.value;
@@ -1873,6 +1967,12 @@ var TripDetails = function (_React$Component) {
 
       entry.meals.dinner.vendor = el.dinnerVendor.value;
       entry.meals.dinner.amount = el.dinnerAmt.value;
+
+      //-------------- TEMPORARY CODE ----------------
+      // var fd = new FormData();
+      // fd.append("amount",20);
+      // fd.append("receipt",el.transportReceipt.files[0],el.transportReceipt.files[0].name);
+      // this.props.dispatch(addEntry(fd,this.props.currentPage));
 
       this.props.dispatch((0, _store.addEntry)(entry, this.props.currentPage));
       this.props.dispatch((0, _store.nextPage)());
@@ -1914,7 +2014,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(TripDetails));
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1930,29 +2030,29 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(24);
 
-var _redux = __webpack_require__(24);
+var _redux = __webpack_require__(26);
 
-var _store = __webpack_require__(26);
+var _store = __webpack_require__(28);
 
-var _TripsHome = __webpack_require__(116);
+var _TripsHome = __webpack_require__(115);
 
 var _TripsHome2 = _interopRequireDefault(_TripsHome);
 
-var _TripDetails = __webpack_require__(54);
+var _TripDetails = __webpack_require__(53);
 
 var _TripDetails2 = _interopRequireDefault(_TripDetails);
 
-var _PurchaseHome = __webpack_require__(120);
+var _PurchaseHome = __webpack_require__(122);
 
 var _PurchaseHome2 = _interopRequireDefault(_PurchaseHome);
 
-var _Home = __webpack_require__(121);
+var _Home = __webpack_require__(123);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-__webpack_require__(124);
+__webpack_require__(126);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1983,7 +2083,7 @@ var App = function App() {
       ),
       _react2.default.createElement(
         'div',
-        { className: 'content' },
+        { className: 'container' },
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
@@ -2008,6 +2108,7 @@ _reactDom2.default.render(_react2.default.createElement(
 ), contentNode);
 
 /***/ }),
+/* 55 */,
 /* 56 */,
 /* 57 */,
 /* 58 */,
@@ -2044,8 +2145,7 @@ _reactDom2.default.render(_react2.default.createElement(
 /* 89 */,
 /* 90 */,
 /* 91 */,
-/* 92 */,
-/* 93 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2055,7 +2155,7 @@ _reactDom2.default.render(_react2.default.createElement(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_PropTypes__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(25);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2131,7 +2231,7 @@ function createProvider() {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2230,17 +2330,17 @@ var Subscription = function () {
 
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createConnect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_connectAdvanced__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_shallowEqual__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mapDispatchToProps__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mapStateToProps__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mergeProps__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__selectorFactory__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_shallowEqual__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mapDispatchToProps__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mapStateToProps__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mergeProps__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__selectorFactory__ = __webpack_require__(113);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -2346,7 +2446,7 @@ function createConnect() {
 /* harmony default export */ __webpack_exports__["a"] = (createConnect());
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2383,14 +2483,14 @@ function shallowEqual(objA, objB) {
 }
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(51);
 
 
@@ -2414,13 +2514,13 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(101);
 
 
 
@@ -2452,11 +2552,11 @@ function baseGetTag(value) {
 
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(99);
 
 
 /** Detect free variable `self`. */
@@ -2469,7 +2569,7 @@ var root = __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__["a" /* default */] || fr
 
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2481,7 +2581,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(48)))
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2535,7 +2635,7 @@ function getRawTag(value) {
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2564,11 +2664,11 @@ function objectToString(value) {
 
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(103);
 
 
 /** Built-in value references. */
@@ -2578,7 +2678,7 @@ var getPrototype = Object(__WEBPACK_IMPORTED_MODULE_0__overArg_js__["a" /* defau
 
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2600,7 +2700,7 @@ function overArg(func, transform) {
 
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2636,11 +2736,11 @@ function isObjectLike(value) {
 
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(108);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(107);
 /* global window */
 
 
@@ -2661,10 +2761,10 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(48), __webpack_require__(107)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(48), __webpack_require__(106)(module)))
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -2694,7 +2794,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2719,13 +2819,13 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(49);
 
 
@@ -2860,7 +2960,7 @@ function combineReducers(reducers) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2914,7 +3014,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2970,7 +3070,7 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2992,7 +3092,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3049,14 +3149,14 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__verifySubselectors__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__verifySubselectors__ = __webpack_require__(114);
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 
@@ -3162,12 +3262,12 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(25);
 
 
 function verify(selector, methodName, displayName) {
@@ -3187,7 +3287,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3203,15 +3303,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(127);
+__webpack_require__(116);
 
-var _store = __webpack_require__(26);
+var _store = __webpack_require__(28);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(24);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _TripDetails = __webpack_require__(54);
+var _TripDetails = __webpack_require__(53);
 
 var _TripDetails2 = _interopRequireDefault(_TripDetails);
 
@@ -3270,13 +3370,13 @@ var TripsHome = function (_React$Component) {
         'div',
         { className: 'trip-dates' },
         _react2.default.createElement(
-          'p',
-          null,
-          'Please select the start and end date for the trip'
-        ),
-        _react2.default.createElement(
           'form',
           null,
+          _react2.default.createElement(
+            'p',
+            null,
+            'Please select the start and end date for the trip'
+          ),
           _react2.default.createElement(
             'div',
             null,
@@ -3309,7 +3409,7 @@ var TripsHome = function (_React$Component) {
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/tripDetails', onClick: this.nextClick },
-            'All Issues'
+            'Next'
           )
         )
       );
@@ -3323,7 +3423,51 @@ TripsHome = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)()(TripsHome
 exports.default = TripsHome;
 
 /***/ }),
-/* 117 */,
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(117);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(15)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".trip-dates {\n  color: #544a45;\n}\n.trip-dates p {\n  text-align: center;\n}\n.trip-dates form div {\n  margin-top: 20px;\n}\n.trip-dates form a {\n  background-color: #c6beba;\n  padding: 10px;\n  border-radius: 5px;\n  border: 0;\n  margin-top: 20px;\n  width: 100px;\n  display: inline-block;\n  text-align: center;\n  text-decoration: none;\n}\n.trip-dates form a.active {\n  background-color: #c90202;\n}\n@media screen and (min-width: 960px) {\n  .trip-dates form {\n    max-width: 300px;\n    margin: 0 auto;\n  }\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 118 */
 /***/ (function(module, exports) {
 
@@ -3420,6 +3564,51 @@ module.exports = function (css) {
 
 /***/ }),
 /* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(120);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(15)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".trip-details {\n  color: #544a45;\n}\n.trip-details form section {\n  margin: 20px 0;\n}\n.trip-details form section .file {\n  overflow: hidden;\n  position: relative;\n  border: 1px solid lightgray;\n  border-radius: 5px;\n  float: left;\n  padding: .5em;\n  float: right;\n}\n.trip-details form section .file [type=file] {\n  cursor: pointer;\n  opacity: 0;\n  position: absolute;\n  right: 0;\n  text-align: right;\n  top: 0;\n  margin: 0;\n}\n.trip-details form button {\n  background-color: #c6beba;\n  padding: 10px;\n  border-radius: 5px;\n  border: 0;\n  margin-top: 20px;\n  width: 100px;\n  display: inline-block;\n  text-align: center;\n  text-decoration: none;\n}\n.trip-details form button.active {\n  background-color: #c90202;\n}\n@media screen and (min-width: 960px) {\n  .trip-details {\n    max-width: 600px;\n    margin: 0 auto;\n  }\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3437,7 +3626,7 @@ let DateManager = {
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3487,7 +3676,7 @@ var PurchaseHome = function (_React$Component) {
 exports.default = PurchaseHome;
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3501,7 +3690,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(122);
+__webpack_require__(124);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3534,13 +3723,13 @@ var Home = function Home() {
 exports.default = Home;
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(123);
+var content = __webpack_require__(125);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3548,7 +3737,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(28)(content, options);
+var update = __webpack_require__(15)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -3565,27 +3754,27 @@ if(false) {
 }
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".home {\n  text-align: center;\n  color: #544a45;\n  height: 100%;\n}\n.home p {\n  text-align: center;\n  font-size: 16px;\n  padding: 30px;\n}\n.home a {\n  display: inline-block;\n  padding: 20px;\n  width: 200px;\n  background-color: #f2c3b8;\n  margin: 0 20px;\n  text-decoration: none;\n}\n.home a:active {\n  color: white;\n}\n", ""]);
+exports.push([module.i, ".home {\n  text-align: center;\n  color: #544a45;\n  height: 100%;\n}\n.home p {\n  text-align: center;\n  font-size: 16px;\n  margin-bottom: 30px;\n}\n.home span {\n  margin: 10px 0;\n  display: inline-block;\n}\n.home a {\n  color: white;\n  display: block;\n  padding: 10px;\n  width: 100%;\n  background-color: #c90202;\n  text-decoration: none;\n  border-radius: 5px;\n}\n.home a:active {\n  color: white;\n}\n@media screen and (min-width: 960px) {\n  .home {\n    max-width: 300px;\n    margin: 0 auto;\n  }\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(125);
+var content = __webpack_require__(127);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3593,7 +3782,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(28)(content, options);
+var update = __webpack_require__(15)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -3610,110 +3799,19 @@ if(false) {
 }
 
 /***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(27)(false);
-// imports
-
-
-// module
-exports.push([module.i, "* {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n  font-family: Arial;\n}\nheader {\n  padding: 30px;\n  text-align: center;\n  background-color: #f25d37;\n  color: white;\n  margin-bottom: 20px;\n}\n.container {\n  margin: 0 auto;\n}\n.hide {\n  display: none;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 126 */,
 /* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(128);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(28)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-dates.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".trip-dates {\n  color: #544a45;\n}\n.trip-dates p {\n  text-align: center;\n}\n.trip-dates form div {\n  margin-top: 20px;\n}\n.trip-dates form button {\n  background-color: #c6beba;\n  padding: 20px;\n  border-radius: 0;\n  border: 0;\n  margin-top: 20px;\n}\n.trip-dates form button.active {\n  background-color: #f2c3b8;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(130);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(28)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./trip-details.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(27)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".trip-details {\n  color: #544a45;\n}\n.trip-details form div {\n  margin-top: 20px;\n}\n.trip-details form button {\n  background-color: #c6beba;\n  padding: 20px;\n  border-radius: 0;\n  border: 0;\n  margin-top: 20px;\n}\n.trip-details form button.active {\n  background-color: #f2c3b8;\n}\n", ""]);
+exports.push([module.i, "* {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n  font-family: Arial;\n  font-size: 18px;\n}\nheader {\n  padding: 30px;\n  text-align: center;\n  background-color: #c90202;\n  color: white;\n  margin-bottom: 20px;\n}\n.hide {\n  display: none;\n}\ninput {\n  border-radius: 5px;\n  border: 1px solid lightgray;\n  height: 40px;\n  line-height: 40px;\n  display: block;\n  margin-top: 5px;\n  width: 100%;\n}\nlabel {\n  color: #c4c0c0;\n  display: inline-block;\n  margin-top: 15px;\n}\n.cf::after {\n  content: '';\n  display: block;\n  clear: both;\n}\n@media screen and (min-width: 960px) {\n  .container {\n    max-width: 840px;\n    margin: 0 auto;\n  }\n}\n", ""]);
 
 // exports
 
 
 /***/ })
-]),[55]);
+],[54]);
 //# sourceMappingURL=app.bundle.js.map

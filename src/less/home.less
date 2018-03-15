@@ -7,21 +7,30 @@
   p{
     text-align: center;
     font-size: 16px;
-    padding: 30px;
+    margin-bottom: 30px;
   }
-
-  a{
+  span{
+    margin: 10px 0;
     display: inline-block;
-    padding: 20px;
-    width: 200px;
-    background-color: @theme-highlight;
-    margin: 0 20px;
+  }
+  a{
+    color: white;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    background-color: @theme-main;
     text-decoration: none;
-
+    border-radius: 5px;
     &:active{
       color: white;
     }
 
   }
 
+}
+@media screen and (min-width: 960px){
+  .home{
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }

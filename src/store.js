@@ -127,7 +127,6 @@ export {expensesApp, setDates, setCurrentPage, nextPage, addEntry};
 
 /*------------------- AJAX Calls ------------------------*/
 const createTripExpense = (trip) => {
-
     let saveTrip = new Promise(function(resolve, reject){
     let xhr = new XMLHttpRequest();
     xhr.open('POST','http://localhost:3000/api/expenses',true);

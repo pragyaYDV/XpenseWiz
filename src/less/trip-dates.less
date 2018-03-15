@@ -8,18 +8,31 @@
   form{
     div{
       margin-top: 20px;
-
     }
-    button{
+    a{
       background-color: @theme-disabled;
-      padding: 20px;
-      border-radius: 0;
+      padding: 10px;
+      border-radius: 5px;
       border: 0;
       margin-top: 20px;
+      width: 100px;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
       &.active{
-          background-color: @theme-highlight;
+          background-color: @theme-main;
       }
     }
   }
 
+}
+
+
+@media screen and (min-width: 960px){
+  .trip-dates{
+    form{
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
 }

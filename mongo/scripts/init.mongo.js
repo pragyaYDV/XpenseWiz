@@ -15,6 +15,26 @@ db.users.insert([
   {
     name: "Vennela",
     empID: 103
+  },
+  {
+    name: "Alena",
+    empID: 104
+  },
+  {
+    name: "Shiv",
+    empID: 105
+  },
+  {
+    name: "Ryan",
+    empID: 106
+  },
+  {
+    name: "Andrew",
+    empID: 107
+  },
+  {
+    name: "Jason",
+    empID: 108
   }
 ]);
 
@@ -23,15 +43,19 @@ db.users.insert([
 db.expenses.insert([
   {
     empID: 101,
-    expenses: []
+    trips: [],
+    purchases: []
+
   },
   {
     empID: 102,
-    expenses: []
+    trips: [],
+    purchases: []
   },
   {
     empID: 103,
-    expenses: []
+    trips: [],
+    purchases: []
   }
 ]);
 

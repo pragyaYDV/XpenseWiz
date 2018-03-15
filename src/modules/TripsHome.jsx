@@ -37,8 +37,8 @@ class TripsHome extends React.Component{
   render(){
     return (
       <div className="trip-dates">
-        <p>Please select the start and end date for the trip</p>
         <form>
+          <p>Please select the start and end date for the trip</p>
           <div>
             <label>Start Date:</label>
             <input type="date" ref= {input => this.startDate = input} name="startDate" onChange={this.onDateChange}/>
@@ -48,9 +48,8 @@ class TripsHome extends React.Component{
             <input type="date" ref= {input => this.endDate = input} name="endDate" onChange={this.onDateChange} />
           </div>
           <div className={"error "+ (this.state.errorState ? '' : 'hide')}>The end date cannot be less than the start date.</div>
-          <Link to={'/tripDetails'} onClick={this.nextClick}>All Issues</Link>
+          <Link to={'/tripDetails'} onClick={this.nextClick}>Next</Link>
         </form>
-
       </div>
 
     );
